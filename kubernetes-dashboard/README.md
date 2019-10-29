@@ -2,7 +2,7 @@
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
 
-kubectl proxy --port=8001 --address=172.77.0.2
+kubectl proxy --port=8001 --address='0.0.0.0' --accept-hosts='^*$'
 
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 
