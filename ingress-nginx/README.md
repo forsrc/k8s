@@ -15,4 +15,7 @@ spec:
   - hosts:
     - demo.forsrc.com
     secretName: nginx-demo
+    
+ 
+curl https://demo.forsrc.com:32443/ -k
 ```
