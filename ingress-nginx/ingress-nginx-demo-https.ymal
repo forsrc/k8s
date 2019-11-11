@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ingress-nginx-demo
+  labels:
+    name: ingress-nginx-demo
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  namespace: ingress-nginx-demo
+spec:
+  selector:
+    app: myapp
+    release: stable
+  ports:
+  - name: myapp
+    port: 80
+    targetPort: 80
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: ingress-nginx-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+      release: stable
+  template:
+    metadata:
+      labels:
+        app: myapp
+        release: stable
+    spec:
+      containers:
+      - name: myapp
+        image: nginx
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: myapp
+          containerPort: 80
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-myapp
+  namespace: ingress-nginx-demo
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: demo.forsrc.com
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: myapp
+          servicePort: 80
+  tls:
+  - hosts:
+    - demo.forsrc.com
+    secretName: nginx-demo
+    # openssl genrsa -out demo.forsrc.com.key 2048
+    # openssl req -new -x509 -key demo.forsrc.com.key -out demo.forsrc.com.crt -subj /C=CN/ST=forsrc/L=forsrc/O=devops/CN=demo.forsrc.com
+    # kubectl create secret tls nginx-demo --cert=demo.forsrc.com.crt --key=demo.forsrc.com.key
