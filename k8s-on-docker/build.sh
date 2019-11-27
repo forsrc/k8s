@@ -1,5 +1,8 @@
 
 
-docker build -t forsrc/centos:docker ./centos-docker-image
-
-docker build -t forsrc/centos:k8s ./centos-k8s-image
+cd centos-docker-image
+sudo ./build.sh
+cd ..
+cd centos-k8s-image
+sudo ./build.sh
+cd ..
