@@ -1,0 +1,12 @@
+{
+    "registry-mirrors": [
+          "http://f1361db2.m.daocloud.io",
+	       	"https://kfwkfulq.mirror.aliyuncs.com",
+	       	"https://2lqq34jg.mirror.aliyuncs.com",
+	       	"https://pee6w651.mirror.aliyuncs.com",
+	       	"https://registry.docker-cn.com",
+	       	"http://hub-mirror.c.163.com"],
+    "insecure-registries": ["172.30.0.0/16"],
+    "dns": ["8.8.8.8", "114.114.114.114"]
+}
+
