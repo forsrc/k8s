@@ -7,6 +7,9 @@
  
 ```
 
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+source <(kubectl completion bash)
+
 sudo docker exec -it centos-k8s-master bash
 
 echo 'nameserver 8.8.8.8' > /etc/resolv.conf
