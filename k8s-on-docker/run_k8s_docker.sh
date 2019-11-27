@@ -1,5 +1,8 @@
 sudo swapoff -a
 
+sudo mkdir ~/docker
+sudo cp -rf data ~/docker
+
 docker network create --subnet=172.77.0.0/24 --gateway=172.77.0.1 net-centos-k8s
 
 docker run -d --privileged \
