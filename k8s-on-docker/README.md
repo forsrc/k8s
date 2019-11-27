@@ -1,5 +1,5 @@
 ```
- kubeadm config images list
+kubeadm config images list
  
 k8s.gcr.io/kube-apiserver:v1.15.3
 k8s.gcr.io/kube-controller-manager:v1.15.3
