@@ -1,0 +1,31 @@
+deb http://mirrors.aliyun.com/ubuntu/ cosmic main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ cosmic main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ cosmic-updates main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ cosmic-updates main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ cosmic-backports main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ cosmic-backports main restricted universe multiverse
+deb https://mirrors.aliyun.com/ cosmic-security main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ cosmic-security main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ cosmic-proposed main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ cosmic-proposed main restricted universe multiverse
+
+
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ cosmic main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ cosmic main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ cosmic-updates main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ cosmic-updates main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ cosmic-backports main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ cosmic-backports main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ cosmic-security main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ cosmic-security main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ cosmic-proposed main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ cosmic-proposed main restricted universe multiverse
+
+
+deb https://dl.winehq.org/wine-builds/ubuntu/ cosmic main
+# deb-src https://dl.winehq.org/wine-builds/ubuntu/ cosmic main
+# deb-src https://dl.winehq.org/wine-builds/ubuntu/ cosmic main
+deb [arch=amd64] https://download.docker.com/linux/ubuntu cosmic stable
+# deb-src [arch=amd64] https://download.docker.com/linux/ubuntu cosmic stable
+# see the sources.list(5) manual.
