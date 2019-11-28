@@ -17,6 +17,14 @@ k8s.gcr.io/coredns:1.3.1
 ```
  
 ```
+modprobe ip_vs
+modprobe ip_vs_rr
+modprobe ip_vs_wrr
+modprobe ip_vs_sh
+modprobe nf_conntrack_ipv4
+lsmod | grep ip_vs
+lsmod | grep nf_conntrack_ipv4
+
 yum install bash-completion -y
 source /usr/share/bash-completion/bash_completion
 echo 'source <(kubectl completion bash)' >>~/.bashrc
