@@ -16,7 +16,7 @@ modprobe br_netfilter
 #sysctl -p /etc/sysctl.d/k8s.conf
 
 
-mkdir -p /etc/sysconfig/modules/ipvs.modules
+mkdir -p /etc/sysconfig/modules
 cat > /etc/sysconfig/modules/ipvs.modules <<EOF
 #!/bin/bash
 modprobe -- ip_vs
