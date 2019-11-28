@@ -8,8 +8,8 @@ source <(kubectl completion bash)
 
 ################ static pod
 
-
-cat <<EOF >/etc/kubernetes/manifests/static-web.yaml
+mkdir /etc/kubelet.d
+cat <<EOF >/etc/kubelet.d/static-web.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -36,6 +36,6 @@ echo 'KUBELET_EXTRA_ARGS="--cluster-dns=10.96.0.10 --cluster-domain=cluster.loca
 
 systemctl daemon-reload
 systemctl restart kubelet
-systmectl status kubelet
+systemctl status kubelet
 
 ################
