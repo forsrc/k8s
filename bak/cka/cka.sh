@@ -1,3 +1,15 @@
+################ namespace
+
+kubectl create namespace cka
+
+# or
+cat <<EOF > namespace-cka.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cka
+EOF
+
 ################ kubectl completion bash
 
 yum install bash-completion -y
@@ -15,6 +27,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: static-web
+  namespace: cka
   labels:
     role: myrole
 spec:
@@ -44,9 +57,43 @@ systemctl status kubelet -l
 
 ps -ef | grep kubelet
 
+################## --sort-by
+
+kubectl get pod --all-namespaces --sort-by=.metadata.name
+
+################## daemonset
+
+kubectl run daemonset-test -n cka --image=nginx -o yaml  --dry-run > daemonset-test.yaml
+
+apiVersion: apps/v1
+#kind: Deployment
+kind: DaemonSet  ######################
+metadata:
+  #creationTimestamp: null
+  labels:
+    run: daemonset-test
+  name: daemonset-test
+  namespace: cka
+spec:
+  #replicas: 1      ##########################
+  selector:
+    matchLabels:
+      run: daemonset-test
+  #strategy: {}
+  template:
+    metadata:
+      #creationTimestamp: null
+      labels:
+        run: daemonset-test
+    spec:
+      containers:
+      - image: nginx
+        name: daemonset-test
+        #resources: {}
+#status: {} ##################
+
 ##################
 
 
 
 
-##################
