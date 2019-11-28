@@ -19,6 +19,8 @@ source <(kubectl completion bash)
 
 ################ static pod
 
+# https://v1-15.docs.kubernetes.io/docs/tasks/configure-pod-container/static-pod/
+
 cat /var/lib/kubelet/config.yaml  # staticPodPath: /etc/kubernetes/manifests
 
 mkdir /etc/kubelet.d
@@ -118,6 +120,15 @@ spec:
 #status: {}
 
 
+############### rollout  nginx 1.9.1 -> 1.13.1 -> 1.9.1
+
+kubectl run nginx-rollout --image=nginx:1.9.1
+kubectl set image deployment nginx-rollout nginx-rollout=nginx:1.13.1 --record
+kubectl rollout history deployment nginx-rollout
+kubectl rollout undo deployment nginx-rollout
+
+
+
+
+
 ###############
-
-
