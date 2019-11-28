@@ -49,5 +49,8 @@ kubectl proxy --port=8001 --address=172.77.0.2
 
 curl http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 
+
+kubectl taint node centos-k8s-master node-role.kubernetes.io/master-
+kubectl taint node centos-k8s-master node-role.kubernetes.io/master="":NoSchedule
 ```
 
