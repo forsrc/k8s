@@ -24,6 +24,7 @@ modprobe ip_vs_sh
 modprobe nf_conntrack_ipv4
 lsmod | grep ip_vs
 lsmod | grep nf_conntrack_ipv4
+ipvsadm
 
 yum install bash-completion -y
 source /usr/share/bash-completion/bash_completion
