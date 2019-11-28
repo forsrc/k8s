@@ -1,4 +1,3 @@
-
 ################ kubectl completion bash
 
 yum install bash-completion -y
@@ -50,4 +49,4 @@ ps -ef | grep kubelet
 
 
 
-#################
+##################
