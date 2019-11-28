@@ -64,6 +64,7 @@ ps -ef | grep kubelet
 kubectl get pod --all-namespaces --sort-by=.metadata.name
 
 ################## daemonset
+# https://v1-15.docs.kubernetes.io/docs/concepts/workloads/controllers/daemonset/
 
 kubectl run daemonset-test -n cka --image=nginx -o yaml  --dry-run > daemonset-test.yaml
 
