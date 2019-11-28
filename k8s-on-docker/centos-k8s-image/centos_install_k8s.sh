@@ -51,6 +51,12 @@ EOF
 
 yum install -y kubelet-1.15.3 kubeadm-1.15.3 kubectl-1.15.3 nfs-utils
 
+cat <<EOF > /run/flannel/subnet.env
+FLANNEL_NETWORK=10.244.0.0/16
+FLANNEL_SUBNET=10.244.0.1/24
+FLANNEL_MTU=1450
+FLANNEL_IPMASQ=true
+EOF
 
 mkdir ~/k8s
 
