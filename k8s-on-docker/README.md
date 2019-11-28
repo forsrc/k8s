@@ -17,7 +17,8 @@ k8s.gcr.io/coredns:1.3.1
 ```
  
 ```
-
+yum install bash-completion -y
+source /usr/share/bash-completion/bash_completion
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 source <(kubectl completion bash)
 
