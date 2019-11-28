@@ -92,8 +92,32 @@ spec:
         #resources: {}
 #status: {} ##################
 
-##################
+################## nginx busybox
+
+kubectl run nginx-busybox --image=nginx -o yaml --dry-run --restart=Never > nginx-busybox.yaml
+
+vi nginx_busybox.yaml
+#####
+apiVersion: v1
+kind: Pod
+metadata:
+  #creationTimestamp: null
+  labels:
+    run: nginx-busybox
+  name: nginx-busybox
+  namespace: cka
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    #resources: {}
+  - image: busybox
+    name: busybox
+  #dnsPolicy: ClusterFirst
+  restartPolicy: Never
+#status: {}
 
 
+###############
 
 
