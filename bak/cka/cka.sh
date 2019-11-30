@@ -178,9 +178,9 @@ spec:
       mountPath: /data
   volumes:
   - name: data
-    #hostPath: /data
     emptyDir: {}
-
+    #hostPath:
+      #path: /data
 
 
 
