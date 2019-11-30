@@ -7,7 +7,7 @@ docker run -d -it --privileged=true  -d -it --network net-ubuntu-k8s --hostname 
 
 
 docker exec -it k8s-on-docker bash
-mkdir -p /var/lib/dpkg/{alternatives,info,parts,triggers,updates} && cd /var/lib/dpkg && touch status
+mkdir -p /var/lib/dpkg/{alternatives,info,parts,triggers,updates} && touch /var/lib/dpkg/status && touch /var/lib/dpkg/available
 
 kubeadm init --kubernetes-version=v1.16.3 --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=172.7.0.10 --ignore-preflight-errors=all
 
