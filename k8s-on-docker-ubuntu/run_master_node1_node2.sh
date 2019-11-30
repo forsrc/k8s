@@ -1,5 +1,7 @@
 docker network create --subnet=172.7.0.0/24 --gateway=172.7.0.1 net-ubuntu-k8s
 
+mkdir -p /k8s-on-docker/etc/
+echo 'nameserver 8.8.8.8' > /k8s-on-docker/etc/resolv.conf
 
 NODE_VOLUME=
 
