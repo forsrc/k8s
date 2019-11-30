@@ -1,4 +1,4 @@
-FROM forsrc:ubuntu:docker
+FROM forsrc/ubuntu:docker
 
 RUN curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
 RUN echo 'deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main' > /etc/apt/sources.list.d/kubernetes.list
