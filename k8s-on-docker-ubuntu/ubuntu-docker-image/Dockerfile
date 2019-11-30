@@ -17,4 +17,4 @@ RUN systemctl enable docker
 #RUN apt-get install -y docker-ce kubelet kubeadm kubectl
 #RUN systemctl enable kubelet
 
-CMD [ "/usr/sbin/init"]
+CMD [ "/sbin/init"]
