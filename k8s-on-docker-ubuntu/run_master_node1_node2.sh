@@ -3,12 +3,13 @@ docker network create --subnet=172.7.0.0/24 --gateway=172.7.0.1 net-ubuntu-k8s
 mkdir -p /k8s-on-docker/etc/
 echo 'nameserver 8.8.8.8' > /k8s-on-docker/etc/resolv.conf
 
-NODE_VOLUME=
+
 
 NODE_NETWORK=net-ubuntu-k8s
 
 NODE_NAME=master
 NODE_IP=172.7.0.10
+NODE_VOLUME=
 NODE_VOLUME="$NODE_VOLUME -v /temp:/temp/"
 NODE_VOLUME="$NODE_VOLUME -v /k8s-on-docker/$NODE_NAME/var/lib/:/var/lib/"
 NODE_VOLUME="$NODE_VOLUME -v /k8s-on-docker/$NODE_NAME/etc/kubernetes/:/etc/kubernetes/"
@@ -19,6 +20,7 @@ docker run -d -it --privileged=true -d -it --network $NODE_NETWORK --ip $NODE_IP
 
 NODE_NAME=node1
 NODE_IP=172.7.0.11
+NODE_VOLUME=
 NODE_VOLUME="$NODE_VOLUME -v /temp:/temp/"
 NODE_VOLUME="$NODE_VOLUME -v /k8s-on-docker/$NODE_NAME/var/lib/:/var/lib/"
 NODE_VOLUME="$NODE_VOLUME -v /k8s-on-docker/$NODE_NAME/etc/kubernetes/:/etc/kubernetes/"
@@ -29,6 +31,7 @@ docker run -d -it --privileged=true -d -it --network $NODE_NETWORK --ip $NODE_IP
 
 NODE_NAME=node2
 NODE_IP=172.7.0.12
+NODE_VOLUME=
 NODE_VOLUME="$NODE_VOLUME -v /temp:/temp/"
 NODE_VOLUME="$NODE_VOLUME -v /k8s-on-docker/$NODE_NAME/var/lib/:/var/lib/"
 NODE_VOLUME="$NODE_VOLUME -v /k8s-on-docker/$NODE_NAME/etc/kubernetes/:/etc/kubernetes/"
