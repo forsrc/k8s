@@ -152,5 +152,37 @@ spec:
 
 kubectl exec -it busybox -- nslookup kubernetes.default
 
+# sh -c 'if [ -f test.txt ]; then  echo OK; else echo NG; fi'
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox:1.28
+    command: ['sh', '-c', 'if [ -f /data/a.txt ]; then sleep 3600; fi']
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  initContainers:
+  - name: init-myservice
+    image: busybox:1.28
+    command: ['sh', '-c', 'touch /data/a.txt']
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    #hostPath: /data
+    emptyDir: {}
+
+
+
+
 ############
 
