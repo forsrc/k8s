@@ -28,6 +28,7 @@ ipvsadm
 
 yum install bash-completion -y
 source /usr/share/bash-completion/bash_completion
+echo 'source /usr/share/bash-completion/bash_completion' >>~/.bashrc
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 source <(kubectl completion bash)
 
