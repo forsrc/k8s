@@ -1,7 +1,7 @@
 ```
 docker network create --subnet=172.10.0.0/24 --gateway=172.10.0.1 net-ubuntu-k8s
 
-docker run -d -it --privileged=true  -d -it --network net-ubuntu-k8s --hostname k8s-on-docker --ip 172.10.0.100  -v /temp:/temp/ -v /k8s-on-docker/var/lib/:/var/lib/ -v /k8s-on-docker/etc/kubernetes/:/etc/kubernetes/ -v /k8s-on-docker/etc/docker/:/etc/docker/ -v /k8s-on-docker/k8s/:/k8s-on-docker/ -v /k8s-on-docker/root/:/root/ --name k8s-on-docker forsrc/ubuntu:k8s /sbin/init
+docker run -d -it --privileged=true  -d -it --network net-ubuntu-k8s --hostname k8s-on-docker --ip 172.10.0.100  -v /temp:/temp/ -v /k8s-on-docker/var/lib/docker/:/var/lib/docker/ -v /k8s-on-docker/var/lib/kubernetes/:/var/lib/kubernetes/ -v /k8s-on-docker/etc/kubernetes/:/etc/kubernetes/ -v /k8s-on-docker/etc/docker/:/etc/docker/ -v /k8s-on-docker/k8s/:/k8s-on-docker/ -v /k8s-on-docker/root/:/root/ --name k8s-on-docker forsrc/ubuntu:k8s /sbin/init
 
 
 
