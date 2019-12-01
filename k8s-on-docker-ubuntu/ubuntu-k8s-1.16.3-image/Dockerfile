@@ -2,7 +2,7 @@ FROM ubuntu:18.10
 
 RUN apt-get update
 
-RUN apt-get install -y linux-image-4.18.0-10-generic
+#RUN apt-get install -y linux-image-4.18.0-10-generic
 
 RUN apt-get install -y apt-transport-https ca-certificates curl software-properties-common systemd bash-completion 
 
@@ -29,10 +29,10 @@ RUN echo "modprobe -- ip_vs_wrr"         >> /etc/init.d/load_modprobe.sh
 RUN echo "modprobe -- ip_vs_sh"          >> /etc/init.d/load_modprobe.sh
 RUN echo "modprobe -- nf_conntrack_ipv4" >> /etc/init.d/load_modprobe.sh
 RUN chmod +x /etc/init.d/load_modprobe.sh
-RUN /etc/init.d/load_modprobe.sh
+#RUN /etc/init.d/load_modprobe.sh
 RUN update-rc.d load_modprobe.sh defaults 90
 
-RUN iptables -P FORWARD ACCEPT
+#RUN iptables -P FORWARD ACCEPT
 
 RUN systemctl enable docker && systemctl enable kubelet
 
