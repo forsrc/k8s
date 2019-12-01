@@ -21,16 +21,18 @@ RUN echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 RUN echo "net.bridge.bridge-nf-call-ip6tables = 1" >> /etc/sysctl.conf
 RUN echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf
 
-RUN echo "modprobe br_netfilter" > /etc/init.d/load_br_netfilter.sh
-RUN echo "modprobe -- ip_vs" >> /etc/init.d/load_br_netfilter.sh
-RUN echo "modprobe -- ip_vs_rr" >> /etc/init.d/load_br_netfilter.sh
-RUN echo "modprobe -- ip_vs_wrr" >> /etc/init.d/load_br_netfilter.sh
-RUN echo "modprobe -- ip_vs_sh" >> /etc/init.d/load_br_netfilter.sh
-RUN echo "modprobe -- nf_conntrack_ipv4" >> /etc/init.d/load_br_netfilter.sh
-RUN chmod +x /etc/init.d/load_br_netfilter.sh
-RUN update-rc.d load_br_netfilter.sh defaults 90
+RUN echo "modprobe br_netfilter"         >  /etc/init.d/load_modprobe.sh
+RUN echo "modprobe ip_tables"            >> /etc/init.d/load_modprobe.sh
+RUN echo "modprobe -- ip_vs"             >> /etc/init.d/load_modprobe.sh
+RUN echo "modprobe -- ip_vs_rr"          >> /etc/init.d/load_modprobe.sh
+RUN echo "modprobe -- ip_vs_wrr"         >> /etc/init.d/load_modprobe.sh
+RUN echo "modprobe -- ip_vs_sh"          >> /etc/init.d/load_modprobe.sh
+RUN echo "modprobe -- nf_conntrack_ipv4" >> /etc/init.d/load_modprobe.sh
+RUN chmod +x /etc/init.d/load_modprobe.sh
+RUN /etc/init.d/load_modprobe.sh
+RUN update-rc.d load_modprobe.sh defaults 90
 
-#RUN iptables -P FORWARD ACCEPT
+RUN iptables -P FORWARD ACCEPT
 
 RUN systemctl enable docker && systemctl enable kubelet
 
