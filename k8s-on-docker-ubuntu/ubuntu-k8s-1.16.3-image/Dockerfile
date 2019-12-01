@@ -2,7 +2,7 @@ FROM ubuntu:18.10
 
 RUN apt-get update
 
-RUN apt-get install --y linux-image-`uname -r`
+RUN apt-get install -y linux-image-`uname -r`
 
 RUN apt-get install -y apt-transport-https ca-certificates curl software-properties-common systemd bash-completion 
 
