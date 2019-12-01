@@ -58,26 +58,3 @@ FLANNEL_MTU=1450
 FLANNEL_IPMASQ=true
 EOF
 
-mkdir ~/k8s
-
-cat > ~/k8s/kubeadm.yaml <<EOF
-apiVersion: kubeadm.k8s.io/v1beta2
-kind: InitConfiguration
-localAPIEndpoint:
-  advertiseAddress: 0.0.0.0
-  bindPort: 6443
-nodeRegistration:
-  taint no sockets found via socket activation: make sure the service was started by systemd
-s:
-  - effect: PreferNoSchedule
-    key: node-role.kubernetes.io/master
----
-apiVersion: kubeadm.k8s.io/v1beta2
-kind: ClusterConfiguration
-kubernetesVersion: v1.15.3
-networking:
-  podSubnet: 10.244.0.0/16
-
-EOF
-
-
