@@ -31,7 +31,7 @@ RUN echo "modprobe -- nf_conntrack_ipv4" >> /etc/init.d/load_br_netfilter.sh
 RUN chmod +x /etc/init.d/load_br_netfilter.sh
 RUN update-rc.d load_br_netfilter.sh defaults 90
 
-RUN iptables -P FORWARD ACCEPT
+RUN sudo iptables -P FORWARD ACCEPT
 
 RUN systemctl enable kubelet
 
