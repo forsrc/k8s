@@ -129,8 +129,8 @@ kubectl rollout history deployment nginx-rollout
 kubectl rollout undo deployment nginx-rollout
 
 
-
-
+kubectl rollout res    deployment nginx-rollout
+kubectl rollout resume deployment nginx-rollout
 
 ############### busybox
 
