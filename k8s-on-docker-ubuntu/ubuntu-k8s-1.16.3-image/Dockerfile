@@ -17,9 +17,9 @@ RUN echo 'deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main'
 RUN apt-get update
 RUN apt-get install -y docker-ce kubelet kubeadm kubectl iptables lvm2 ipvsadm ipset conntrack
 
-RUN echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+RUN echo "net.ipv4.ip_forward = 1"                 >> /etc/sysctl.conf
 RUN echo "net.bridge.bridge-nf-call-ip6tables = 1" >> /etc/sysctl.conf
-RUN echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf
+RUN echo "net.bridge.bridge-nf-call-iptables = 1"  >> /etc/sysctl.conf
 
 RUN echo "modprobe br_netfilter"         >  /etc/init.d/load_modprobe.sh
 RUN echo "modprobe ip_tables"            >> /etc/init.d/load_modprobe.sh
