@@ -18,11 +18,13 @@ NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/k8s/:/k8s-on-docker/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/root/:/root/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/etc/resolv.conf:/etc/resolv.conf"
 
+docker run -d -it --privileged=true -d -it --network $NODE_NETWORK --ip $NODE_IP $NODE_VOLUME --hostname $NODE_NAME --name $NODE_NAME forsrc/ubuntu:k8s /sbin/init
+
+
 #apt-get install bash-completion -y
 echo 'source /usr/share/bash-completion/bash_completion' >>/k8s-on-docker/$NODE_NAME/root/.bashrc
 echo 'source <(kubectl completion bash)' >>/k8s-on-docker/$NODE_NAME/root/.bashrc
 
-docker run -d -it --privileged=true -d -it --network $NODE_NETWORK --ip $NODE_IP $NODE_VOLUME --hostname $NODE_NAME --name $NODE_NAME forsrc/ubuntu:k8s /sbin/init
 
 NODE_NAME=node1
 NODE_IP=172.7.0.11
