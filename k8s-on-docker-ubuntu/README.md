@@ -38,6 +38,6 @@ mkdir -p /var/lib/dpkg/{alternatives,info,parts,triggers,updates} && touch /var/
 kubeadm init --kubernetes-version=v1.16.3 --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=172.7.0.10 --ignore-preflight-errors=all
 
 
-kubeadm join 172.7.0.10:6443 --token aj0oz5.9dc5hh6o5tf6f7vg \
-    --discovery-token-ca-cert-hash sha256:c0fb5053cbf782501272d12168e638da1f8538e64d5b0230e9cc718acd8a54d9 --ignore-preflight-errors=all
+kubeadm join 172.7.0.10:6443 --token pfw6mf.x1er39lb9lylvq94 \
+    --discovery-token-ca-cert-hash sha256:440ff9ee1e39b2fabf319a76360000beb841835d739102c01e8d7b98f66bae6c--ignore-preflight-errors=all
 ```
