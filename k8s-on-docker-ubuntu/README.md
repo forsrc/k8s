@@ -8,7 +8,26 @@ iptables -t nat -I PREROUTING -p tcp --dport 30010 -j DNAT --to-destination 172.
 apt-get install ipvsadm -y
 apt-get install --reinstall linux-image-`uname -r`
 
-
+apt-get install rinetd -y
+rm -f /etc/rinetd.conf
+cat >> /etc/rinetd.conf <<EOF
+# allow 192.168.0.*
+# deny 192.168.1.*
+# logfile /var/log/rinetd.log
+0.0.0.0 8080  172.7.0.10 8080
+0.0.0.0 30080 172.7.0.10 30080
+0.0.0.0 30443 172.7.0.10 30443
+0.0.0.0 30000 172.7.0.10 30000
+0.0.0.0 30001 172.7.0.10 30001
+0.0.0.0 30002 172.7.0.10 30002
+0.0.0.0 30003 172.7.0.10 30003
+0.0.0.0 30004 172.7.0.10 30004
+0.0.0.0 30005 172.7.0.10 30005
+0.0.0.0 30006 172.7.0.10 30006
+0.0.0.0 30007 172.7.0.10 30007
+0.0.0.0 30008 172.7.0.10 30008
+0.0.0.0 30009 172.7.0.10 30009
+EOF
 
 docker exec -it k8s-on-docker bash
 mkdir -p /var/lib/dpkg/{alternatives,info,parts,triggers,updates} && touch /var/lib/dpkg/status && touch /var/lib/dpkg/available
