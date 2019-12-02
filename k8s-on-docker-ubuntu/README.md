@@ -29,6 +29,8 @@ cat >> /etc/rinetd.conf <<EOF
 0.0.0.0 30009 172.7.0.10 30009
 EOF
 
+// if swap on --> kubelet --fail-swap-on=false
+
 docker exec -it k8s-on-docker bash
 mkdir -p /var/lib/dpkg/{alternatives,info,parts,triggers,updates} && touch /var/lib/dpkg/status && touch /var/lib/dpkg/available
 
