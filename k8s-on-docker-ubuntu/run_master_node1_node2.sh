@@ -15,10 +15,12 @@ NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/var/lib/docker/:/var/lib/
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/var/lib/kubelet/:/var/lib/kubelet/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/kubernetes/:/etc/kubernetes/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/docker/:/etc/docker/"
+NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/containerd/:/etc/containerd/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/cni/:/etc/cni/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/k8s/:/k8s-on-docker/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/root/:/root/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/etc/resolv.conf:/etc/resolv.conf"
+
 
 docker run -d -it --privileged=true -d -it --network $NODE_NETWORK --ip $NODE_IP $NODE_VOLUME --hostname $NODE_NAME --name $NODE_NAME $NODE_IMAGE /sbin/init
 
@@ -36,6 +38,7 @@ NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/var/lib/docker/:/var/lib/
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/var/lib/kubelet/:/var/lib/kubelet/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/kubernetes/:/etc/kubernetes/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/docker/:/etc/docker/"
+NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/containerd/:/etc/containerd/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/cni/:/etc/cni/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/k8s/:/k8s-on-docker/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/root/:/root/"
@@ -50,6 +53,7 @@ NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/var/lib/docker/:/var/lib/
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/var/lib/kubelet/:/var/lib/kubelet/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/kubernetes/:/etc/kubernetes/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/docker/:/etc/docker/"
+NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/containerd/:/etc/containerd/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/cni/:/etc/cni/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/k8s/:/k8s-on-docker/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/root/:/root/"
