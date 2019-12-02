@@ -39,5 +39,5 @@ kubeadm init --kubernetes-version=v1.16.3 --pod-network-cidr=10.244.0.0/16 --api
 
 
 kubeadm join 172.7.0.10:6443 --token pfw6mf.x1er39lb9lylvq94 \
-    --discovery-token-ca-cert-hash sha256:440ff9ee1e39b2fabf319a76360000beb841835d739102c01e8d7b98f66bae6c--ignore-preflight-errors=all
+    --discovery-token-ca-cert-hash sha256:440ff9ee1e39b2fabf319a76360000beb841835d739102c01e8d7b98f66bae6c --ignore-preflight-errors=all
 ```
