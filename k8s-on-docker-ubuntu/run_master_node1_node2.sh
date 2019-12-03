@@ -20,10 +20,10 @@ NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/etc/cni/:/etc/cni/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/k8s/:/k8s-on-docker/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/$NODE_NAME/root/:/root/"
 NODE_VOLUME="$NODE_VOLUME -v $NODE_DATA_DIR/etc/resolv.conf:/etc/resolv.conf"
+NODE_PORT="-p 30000:30000 -p 30080:30080 -p 30443:30443 -p 8080:8080 -p 30001:30001 -p 30002:30002 -p 30003:30003 -p 30004:30004 -p 30005:30005"
 
 
-docker run -d -it --privileged=true -d -it --network $NODE_NETWORK --ip $NODE_IP $NODE_VOLUME --hostname $NODE_NAME --name $NODE_NAME $NODE_IMAGE /sbin/init
-
+docker run -d -it --privileged=true -d -it --network $NODE_NETWORK --ip $NODE_IP $NODE_VOLUME $NODE_PORT --hostname $NODE_NAME --name $NODE_NAME $NODE_IMAGE /sbin/init
 
 #apt-get install bash-completion -y
 echo 'source /usr/share/bash-completion/bash_completion' >>/k8s-on-docker/$NODE_NAME/root/.bashrc
