@@ -12,4 +12,6 @@ VOLUME /etc/kubernetes
 
 RUN systemctl enable kubelet
 
-CMD ["wrapdocker"]
+ENTRYPOINT ["wrapdocker"]
+
+CMD ["/sbin/init"]
