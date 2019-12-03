@@ -1,1 +1,1 @@
-docker build -t forsrc/docker .
+docker build -t forsrc/k8s .
