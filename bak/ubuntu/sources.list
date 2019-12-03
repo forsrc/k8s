@@ -46,6 +46,3 @@ deb http://mirrors.aliyun.com/ubuntu cosmic-security main restricted
 deb http://mirrors.aliyun.com/ubuntu cosmic-security universe
 # deb-src http://mirrors.aliyun.com/ubuntu cosmic-security universe
 deb http://mirrors.aliyun.com/ubuntu cosmic-security multiverse
-deb [arch=amd64] https://download.docker.com/linux/ubuntu cosmic stable
-# deb-src [arch=amd64] https://download.docker.com/linux/ubuntu cosmic stable
-# deb-src http://mirrors.aliyun.com/ubuntu cosmic-security multiverse
