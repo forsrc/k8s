@@ -1,5 +1,7 @@
 FROM forsrc/centos:dind
 
+/RUN yum update -n
+
 RUN sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
 RUN yum install -y yum-utils device-mapper-persistent-data lvm2 ipvsadm ipset conntrack ntp
