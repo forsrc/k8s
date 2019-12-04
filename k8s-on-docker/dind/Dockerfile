@@ -1,7 +1,5 @@
 FROM centos:7
 
-RUN yum update -n
-
 RUN yum install -y wget
 
 RUN wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
