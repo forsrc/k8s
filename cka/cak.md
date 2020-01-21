@@ -1,19 +1,33 @@
+```
+source <(kubectl completion bash)
+```
 
-1. Set configuration context ```$ kubectl config use-context k8s``` Monitor the logs of Pod foobar and
 
-*    Extract log lines corresponding to error file-not-found
+
+1. Set configuration context ```$ kubectl config use-context k8s```
+Monitor the logs of Pod ```foobar``` and
+
+*    Extract log lines corresponding to error ```file-not-found```
 *    Write them to ```/opt/KULM00201/foobar```
 
 Question weight 5%
 
+```
+kubectl logs foobar | grep file-not-found > /opt/KULM00201/foobar
+
+```
 ------------------
 
 2. Set configuration context ```$ kubectl config use-context k8s```
 
-List all PVs sorted by name saving the full kubectl output to ```/opt/KUCC0010/my_volumes``` . Use ```kubectl```’s own functionally for sorting the output, and do not manipulate it any further.
+List all PVs sorted by name saving the full ```kubectl``` output to ```/opt/KUCC0010/my_volumes``` . 
+Use ```kubectl```’s own functionally for sorting the output, and do not manipulate it any further.
 
 Question weight 3%
 
+```
+kubectl get pv --sort-by=.metadata.name > /opt/KUCC0010/my_volumes
+```
 ------------------
 
 3. Set configuration context ```$ kubectl config use-context k8s```
@@ -24,6 +38,37 @@ Use Daemonsets to complete this task and use ```ds.kusc00201``` as Daemonset nam
 
 Question weight 3%
 
+```
+kubectl run nginx --image=nginx --dry-run -o yaml > 3.yaml
+vi 3.yaml
+---
+#apiVersion: extensions/v1beta1
+#kind: Deployment
+apiVersion:apps/v1
+kind: DaemonSet
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+spec:
+# replicas: 1
+  selector:
+    matchLabels:
+      run: nginx
+ #strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+#status: {}
+```
 ------------------
 
 
