@@ -160,13 +160,32 @@ Schedule a Pod as follows:
 
 Question weight: 2%
 
+```
+kubectl run nginx-kusc00101 --image=nginx --restart=Never --dry-run > 6.yaml
+vi 6.yaml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-kusc00101
+  labels:
+    run: nginx-kusc00101
+spec:
+  containers:
+  - name: nginx-kusc00101
+    image: nginx
+  nodeSelector:
+    disk: ssd
+
+```
 -------------------
 
 7. Set configuration context ```$ kubectl config use-context k8s```
 Create a deployment as follows
 
 *    Name: ```nginx-app```
-*    Using container nginx with version ```1.10.2-alpine```
+*    Using container ```nginx``` with version ```1.10.2-alpine```
 *    The deployment should contain ```3``` replicas
 
 Next, deploy the app with new version ```1.13.0-alpine``` by performing a rolling update and record that update.
@@ -175,6 +194,18 @@ Finally, rollback that update to the previous version ```1.10.2-alpine```
 
 Question weight: 4%
 
+```
+kubectl run nginx-app --image=nginx:1.10.2-alpine --replicas=3
+ 
+kubectl set image deployment/nginx-app nginx-app=nginx:1.13.0-alpine --record=true
+
+# rollback
+kubectl rollout undo deployment/nginx-app
+ 
+kubectl rollout status -w deployment nginx-app
+ 
+kubectl rollout history deployment/nginx-app       
+```
 -------------------
 
 8. Set configuration context ```$ kubectl config use-context k8s```
@@ -185,7 +216,8 @@ Question weight: 4%
 
 -------------------
 
-9. Set configuration context ```$ kubectl config use-context k8s``` Create a Pod as follows:
+9. Set configuration context ```$ kubectl config use-context k8s```
+Create a Pod as follows:
 
 *    Name: ```jenkins```
 *    Using image: ```jenkins```
