@@ -228,12 +228,17 @@ Create a Pod as follows:
     
 Question weight 3%
 
+```
+kubectl create namespace website-frontend
+kubectl run jenkins --image=jenkins --generator=run-pod/v1 --dry-run -o yaml > 9.yml
+kubectl apply -f 9.yml -n website-frontend
+```
 ------------------
 
 10. Set configuration context ```$ kubectl config use-context k8s```
 Create a deployment spec file that will:
 
-*    Launch 7 replicas of the redis image with the label: ```app_env_stage=dev```
+*    Launch ```7``` replicas of the ```redis``` image with the label: ```app_env_stage=dev```
 *    Deployment name: ```kual00201```
 
 Save a copy of this spec file to ```/opt/KUAL00201/deploy_spec.yaml``` (or .json)
@@ -242,16 +247,25 @@ When you are done, clean up (delete) any new k8s API objects that you produced d
 
 Question weight: 3%
 
+```
+kubectl run kua100201 --image=redis --replicas=7 --labels=app_env_stage=dev --dry-run -o yaml > /opt/KUAL002001/deploy_spec.yaml
+kubectl apply -f /opt/KUAL002001/deploy_spec.yaml 
+kubectl delete -f /opt/KUAL002001/deploy_spec.yaml 
+```
 -------------------
 
 11. Set configuration context ```$ kubectl config use-context k8s```
 
-Create a file ```/opt/KUCC00302/kucc00302.txt``` that lists all pods that implement Service ```foo``` in Namespace production.
+Create a file ```/opt/KUCC00302/kucc00302.txt``` that lists all pods that implement Service ```foo``` in Namespace ```production```.
 
-The format of the file should be one pod name per line.
+The format of the file should be one ```pod``` name per line.
 
 Question weight: 3%
 
+```
+SVC_LABELS=$(kubectl describe svc foo -n production | grep -i selector | awk '{print $2}'
+kubectl get pods --show-labels | grep $SVC_LABELS | awk '{print $1}' > /opt/KUCC00302/kucc00302.txt 
+```
 -------------------
 
 12. Set configuration context ```$ kubectl config use-context k8s```
