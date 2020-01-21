@@ -210,10 +210,13 @@ kubectl rollout history deployment/nginx-app
 
 8. Set configuration context ```$ kubectl config use-context k8s```
 
-Create and configure the service front-end-service so it’s accessible through NodePort and routes to the existing pod named ```front-end````
+Create and configure the service ```front-end-service``` so it’s accessible through ```NodePort``` and routes to the existing pod named ```front-end```
 
 Question weight: 4%
 
+```
+kubectl expose pod front-end --name=front-end-service --type='NodePort' --port=80
+```
 -------------------
 
 9. Set configuration context ```$ kubectl config use-context k8s```
