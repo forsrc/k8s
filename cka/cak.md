@@ -52,11 +52,11 @@ metadata:
     run: nginx
   name: nginx
 spec:
-# replicas: 1
+  #replicas: 1
   selector:
     matchLabels:
       run: nginx
- #strategy: {}
+   #strategy: {}
   template:
     metadata:
       creationTimestamp: null
@@ -72,7 +72,8 @@ spec:
 ------------------
 
 
-4. Set configuration context ```$ kubectl config use-context k8s``` Perform the following tasks
+4. Set configuration context ```$ kubectl config use-context k8s```
+Perform the following tasks
 
 *    Add an init container to ```lumpy--koala``` (Which has been defined in spec file ```/opt/kucc00100/pod-spec-KUCC00100.yaml```)
 *    The init container should create an empty file named ```/workdir/calm.txt```
@@ -81,6 +82,35 @@ spec:
 
 Question weight 7%
 
+```
+vi /opt/kucc00100/pod-sepc-KUCC00100.yaml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lumpy-koala
+spec:
+  containers:
+  - name: checker
+    image: nginx
+    livenessProbe:
+      exec:
+        command: ["test", "-e", "/workdir/calm.txt"]
+    volumeMounts:
+    - name: workdir
+      mountPath: /workdir
+  initContainers:
+  - name: init-busybox
+    image: busybox
+    command: ["/bin/sh", "-c", "touch /workdir/calm.txt"]
+    volumeMounts:
+    - name: workdir
+      mountPath: /workdir
+  volumes:
+  - name: workdir
+    emptyDir: {}
+```
 ------------------
 
 
@@ -90,6 +120,35 @@ Create a pod named ```kucc4``` with a single container for each of the following
 
 Question weight: 4%
 
+```
+kubectl run kucc4 --image=nginx --restart=Never --dry-run -o yaml > 5.yaml
+vi 5.yaml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+ #creationTimestamp: null
+  labels:
+    run: kucc4
+  name: kucc4
+spec:
+  containers:
+  - image: nginx
+    name: kucc4
+  - image: redis
+    name: redis
+  - image: memcached
+    name: memcached
+  - image: consul
+    name: consul
+   #resources: {}
+ #dnsPolicy: ClusterFirst
+ #restartPolicy: Never
+ #status: {}
+ 
+kubectl apply -f 5.yaml
+```
 -------------------
 
 6. Set configuration context ```$ kubectl config use-context k8s```
