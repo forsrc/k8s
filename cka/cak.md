@@ -518,6 +518,16 @@ Hints:
 
 Question weight: 4%
 
+```
+ssh wk8s-node-1
+sudo -i
+kubectl run myservice --image=nginx --generator=run-pod/v1 --dry-run -o yaml >/etc/kubernetes/manifests/21.yml
+cat /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf | grep --config
+cat /var/lib/kubelet/config.yaml | grep staticPodPath
+systemctl daemon-reload
+systemctl restart kubelet
+systemctl enable kubelet
+```
 -------------------
 
 22. Set configuration context ```$ kubectl config use-context ik8s```
@@ -561,6 +571,9 @@ The worker node in this cluster is labelled with ```name=bk8s-node-0``` Hints:
 
 Question weight: 4%
 
+```
+
+```
 -------------------
 
 24. Set configuration context ```$ kubectl config use-context hk8s```
@@ -568,3 +581,22 @@ Question weight: 4%
 Creae a persistent volume with name app-config of capacity 1Gi and access mode ReadWriteOnce. The type of volume is hostPath and its location is ```/srv/app-config```
 
 Question weight: 3%
+```
+https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes
+vi 24.yaml
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: app-config
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /srv/app-config
+ 
+kubectl apply -f 24.yaml
+
+```
