@@ -280,6 +280,65 @@ Create a second Pod named ```pod-secrets-via-env``` using the ```redis``` image,
 
 Question weight: 9%
 
+```
+kubectl create secret generic super-secret --from-literal=credential=alice --from-literal=username=bob
+
+kubectl run pod-secrets-via-file --image=redis --generator=run-pod/v1 --dry-run -o yaml >12.yml
+
+vi 12.yml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pod-secrets-via-file
+  name: pod-secrets-via-file
+spec:
+  volumes:
+  - name: super-secret
+    secret:
+      secretName: super-secret
+  containers:
+  - image: redis
+    name: pod-secrets-via-file
+    resources: {}
+    volumeMounts:
+    - name: super-secret
+      mountPath: /secrets
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+ 
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pod-secrets-via-env
+  name: pod-secrets-via-env
+spec:
+  volumes:
+  - name: super-secret
+    secret:
+      secretName: super-secret
+  containers:
+  - image: redis
+    name: pod-secrets-via-env
+    resources: {}
+    env:
+    - name: TOPSECRET
+      valueFrom:
+        secretKeyRef:
+          name: super-secret
+          key: username
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+```
 -------------------
 
 13. Set configuration context ```$ kubectl config use-context k8s```
