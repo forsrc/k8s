@@ -497,6 +497,14 @@ Hints:
 
 Question weight: 4%
 
+```
+kubectl get nodes
+ssh wk8s-node-0
+sudo -i
+systemctl status kubelet
+systemctl enable kubelet
+systemctl start  kubelet
+```
 -------------------
 
 21. Set configuration context ```$ kubectl config use-context wk8s```
