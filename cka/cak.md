@@ -437,6 +437,14 @@ Ensure you use the ```busybox:1.28``` image(or earlier) for any testing, an the 
 
 Question weight: 7%
 
+```
+kubectl run nginx-dns --image=nginx 
+kubectl expose deployment nginx-dns --port=80
+IP=$(kubectl get pod   -o wide | grep nginx-dns | awk '{print $6}')
+kubectl run busybox --image=busybox:1.28 --restart=Never --command sleep 3600
+kubectl exec -ti busybox -- nslookup nginx-dns > /opt/service.dns
+kubectl exec -ti busybox -- nslookup $IP > /opt/pod.dns
+```
 -------------------
 
 18. No configuration context change required for this item
