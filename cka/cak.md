@@ -377,17 +377,26 @@ spec:
   volumes:
   - name: cache-control
     emptyDir: {}
+   #hostPath:
+     #path: /data/redis
+     #type: DirectoryOrCreate
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 status: {}
+
+kubectl create ns pre-prod
+kubectl apply -f 13.yml -n pre-prod
 ```
 -------------------
 
 14. Set configuration context ```$ kubectl config use-context k8s```
-Scale the deployment webserver to ```6``` pods
+Scale the deployment ```webserver``` to ```6``` pods
 
 Question weight: 1%
 
+```
+kubectl scale deployment webserver --replicas=6
+```
 -------------------
 
 15. Set configuration context ```$ kubectl config use-context k8s```
@@ -396,6 +405,11 @@ Check to see how many nodes are ready (not including nodes tainted ```NoSchedule
 
 Question weight: 2%
 
+```
+READY=$(kubectl get node | grep -w  Ready | wc -l)
+NO_SCHEDULE=$(kubectl describe nodes | grep Taints | grep NoShttps://github.com/chedule | wc -l)
+expr $READY - $NO_SCHEDULE > /opt/nodenum
+```
 -------------------
 
 16. Set configuration context ```$ kubectl config use-context k8s```
@@ -404,6 +418,9 @@ From the Pod label ```name=cpu-utilizer```, find pods running high CPU workloads
 
 Question weight: 2%
 
+```
+kubectl top pods -l name=cpu-utilizer --all-namespaces | sort -k3 -n | tail -1 | awk '{print $2}' > /opt/cpu.txt
+```
 -------------------
 
 17. Set configuration context ```$ kubectl config use-context k8s```
