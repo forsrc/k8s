@@ -461,6 +461,16 @@ The following TLS ```certificates/key``` are supplied for connecting to the serv
 
 Question weight: 7%
 
+```
+ETCDCTL_API=3
+etcdctl --endpoints=http://127.0.0.1:2379 \
+        --ca-file=/opt/KUCM00302/ca.crt \
+        --cert-file=/opt/KUCM00302/etcd-client.crt \
+        --key=/opt/KUCM00302/etcd-client.key \
+        snapshot save /data/backup/etcd-snapshot.db
+
+ETCDCTL_API=3 etcdctl --write-out=table snapshot status /data/backup/etcd-snapshot.db
+```
 -------------------
 
 19. Set configuration context ```$ kubectl config use-context ek8s```
