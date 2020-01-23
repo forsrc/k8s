@@ -479,6 +479,11 @@ Set the node labelled with ```name=ek8s-node-1``` as unavailable and reschedule 
 
 Question weight: 4%
 
+```
+NODE=$(kubectl get nodes -l name=ek8s-node-1 | awk '{print $1}')
+kubectl drain $NODE --ignore-daemonsets=true --delete-local-data=true --force=true
+kubectl uncordon $NODE
+```
 -------------------
 
 20. Set configuration context ```$ kubectl config use-context wk8s```
