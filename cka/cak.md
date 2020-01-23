@@ -353,6 +353,34 @@ It should launch in the ```pre-prod``` namespace and the volume MUST NOT be pers
 
 Question weight: 4%
 
+```
+kubectl run non-persistent-redis --image=redis --generator=run-pod/v1 --dry-run -o yaml > 13.yaml
+vi 13.yml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: non-persistent-redis
+  name: non-persistent-redis
+spec:
+  containers:
+  - image: redis
+    imagePullPolicy: IfNotPresent
+    name: non-persistent-redis
+    resources: {}
+    volumeMounts:
+    - mountPath: /data/redis
+      name: cache-control
+  volumes:
+  - name: cache-control
+    emptyDir: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+```
 -------------------
 
 14. Set configuration context ```$ kubectl config use-context k8s```
