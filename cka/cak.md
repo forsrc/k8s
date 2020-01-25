@@ -249,7 +249,7 @@ Question weight: 3%
 
 ```
 kubectl run kua100201 --image=redis --replicas=7 --labels=app_env_stage=dev --dry-run -o yaml > /opt/KUAL002001/deploy_spec.yaml
-kubectl apply -f /opt/KUAL002001/deploy_spec.yaml 
+kubectl apply  -f /opt/KUAL002001/deploy_spec.yaml 
 kubectl delete -f /opt/KUAL002001/deploy_spec.yaml 
 ```
 -------------------
@@ -440,7 +440,7 @@ Question weight: 7%
 ```
 kubectl run nginx-dns --image=nginx 
 kubectl expose deployment nginx-dns --port=80
-IP=$(kubectl get pod   -o wide | grep nginx-dns | awk '{print $6}')
+IP=$(kubectl get pod -o wide | grep nginx-dns | awk '{print $6}')
 kubectl run busybox --image=busybox:1.28 --restart=Never --command sleep 3600
 kubectl exec -ti busybox -- nslookup nginx-dns > /opt/service.dns
 kubectl exec -ti busybox -- nslookup $IP > /opt/pod.dns
@@ -481,7 +481,7 @@ Question weight: 4%
 
 ```
 NODE=$(kubectl get nodes -l name=ek8s-node-1 | awk '{print $1}')
-kubectl drain $NODE --ignore-daemonsets=true --delete-local-data=true --force=true
+kubectl drain    $NODE --ignore-daemonsets=true --delete-local-data=true --force=true
 kubectl uncordon $NODE
 ```
 -------------------
@@ -526,7 +526,7 @@ cat /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf | grep --config
 cat /var/lib/kubelet/config.yaml | grep staticPodPath
 systemctl daemon-reload
 systemctl restart kubelet
-systemctl enable kubelet
+systemctl enable  kubelet
 ```
 -------------------
 
@@ -566,13 +566,25 @@ Given a partially-functioning Kubenetes cluster, identify symptoms of failure on
 
 The worker node in this cluster is labelled with ```name=bk8s-node-0``` Hints:
 
-*    You can ssh to the relevant nodes using ```$ ssh $(NODE) where $(NODE)``` is one of ```bk8s-master-0``` or ```bk8s-node-0```
+*    You can ssh to the relevant nodes using ```$ ssh $(NODE)``` where $(NODE) is one of ```bk8s-master-0``` or ```bk8s-node-0```
 *    You can assume elevated privileges on any node in the cluster with the following command ```$ sudo -i```
 
 Question weight: 4%
 
 ```
+ssh bk8s-master-0
+sudo -i
+docker ps
+systemctl status etcd
+systemctl status api-server
+systemctl status controllor-manager
+systemctl status kubelet | grep  "\-\-config\="
+cat /var/lib/kubelet/config.yaml | grep staticPodPath
+ls /etc/kubernetes/manifests
 
+ssh bk8s-node-0
+sudo -i
+systemctl start kube-manager-controller
 ```
 -------------------
 
