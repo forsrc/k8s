@@ -28,6 +28,7 @@ Question weight 3%
 ```
 kubectl get pv --sort-by=.metadata.name > /opt/KUCC0010/my_volumes
 ```
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 ------------------
 
 3. Set configuration context ```$ kubectl config use-context k8s```
@@ -69,6 +70,7 @@ spec:
         resources: {}
 #status: {}
 ```
+https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/ 
 ------------------
 
 
@@ -111,6 +113,7 @@ spec:
   - name: workdir
     emptyDir: {}
 ```
+https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 ------------------
 
 
@@ -149,6 +152,7 @@ spec:
  
 kubectl apply -f 5.yaml
 ```
+https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
 -------------------
 
 6. Set configuration context ```$ kubectl config use-context k8s```
@@ -179,6 +183,7 @@ spec:
     disk: ssd
 
 ```
+ https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ 
 -------------------
 
 7. Set configuration context ```$ kubectl config use-context k8s```
@@ -217,6 +222,7 @@ Question weight: 4%
 ```
 kubectl expose pod front-end --name=front-end-service --type='NodePort' --port=80
 ```
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 -------------------
 
 9. Set configuration context ```$ kubectl config use-context k8s```
@@ -233,6 +239,7 @@ kubectl create namespace website-frontend
 kubectl run jenkins --image=jenkins --generator=run-pod/v1 --dry-run -o yaml > 9.yml
 kubectl apply -f 9.yml -n website-frontend
 ```
+https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
 ------------------
 
 10. Set configuration context ```$ kubectl config use-context k8s```
@@ -339,6 +346,7 @@ spec:
 status: {}
 
 ```
+https://kubernetes.io/docs/concepts/configuration/secret/
 -------------------
 
 13. Set configuration context ```$ kubectl config use-context k8s```
@@ -471,6 +479,7 @@ etcdctl --endpoints=http://127.0.0.1:2379 \
 
 ETCDCTL_API=3 etcdctl --write-out=table snapshot status /data/backup/etcd-snapshot.db
 ```
+https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster
 -------------------
 
 19. Set configuration context ```$ kubectl config use-context ek8s```
@@ -484,6 +493,8 @@ NODE=$(kubectl get nodes -l name=ek8s-node-1 | awk '{print $1}')
 kubectl drain    $NODE --ignore-daemonsets=true --delete-local-data=true --force=true
 kubectl uncordon $NODE
 ```
+ https://kubernetes.io/docs/concepts/architecture/nodes/
+ https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#concepts
 -------------------
 
 20. Set configuration context ```$ kubectl config use-context wk8s```
@@ -528,6 +539,7 @@ systemctl daemon-reload
 systemctl restart kubelet
 systemctl enable  kubelet
 ```
+https://kubernetes.io/docs/tasks/administer-cluster/static-pod/
 -------------------
 
 22. Set configuration context ```$ kubectl config use-context ik8s```
@@ -558,6 +570,9 @@ Hints:
 
 Question weight: 8%
 
+```
+```
+https://unofficial-kubernetes.readthedocs.io/en/latest/admin/kubelet-tls-bootstrapping/
 -------------------
 
 23. Set configuration context ```$ kubectl config use-context bk8s```
@@ -612,3 +627,5 @@ spec:
 kubectl apply -f 24.yaml
 
 ```
+https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes
+-------------------
