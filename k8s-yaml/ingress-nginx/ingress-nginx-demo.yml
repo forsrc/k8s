@@ -28,7 +28,7 @@ metadata:
   name: myapp
   namespace: ingress-nginx-demo
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: myapp
