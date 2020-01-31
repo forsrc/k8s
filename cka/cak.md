@@ -40,7 +40,7 @@ Use Daemonsets to complete this task and use ```ds.kusc00201``` as Daemonset nam
 Question weight 3%
 
 ```
-kubectl run nginx --image=nginx --dry-run -o yaml > 3.yaml
+kubectl run ds.kusc00201 --image=nginx --dry-run -o yaml > 3.yaml
 vi 3.yaml
 ---
 #apiVersion: extensions/v1beta1
@@ -50,23 +50,23 @@ kind: DaemonSet
 metadata:
   creationTimestamp: null
   labels:
-    run: nginx
-  name: nginx
+    run: ds.kusc00201
+  name: ds.kusc00201
 spec:
   #replicas: 1
   selector:
     matchLabels:
-      run: nginx
+      run: ds.kusc00201
    #strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        run: nginx
+        run: ds.kusc00201
     spec:
       containers:
       - image: nginx
-        name: nginx
+        name: ds.kusc00201
         resources: {}
 #status: {}
 ```
