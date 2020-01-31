@@ -290,9 +290,9 @@ Question weight: 9%
 ```
 kubectl create secret generic super-secret --from-literal=credential=alice --from-literal=username=bob
 
-kubectl run pod-secrets-via-file --image=redis --generator=run-pod/v1 --dry-run -o yaml >12.yml
-echo "---" > 12.yml
-kubectl run pod-secrets-via-env --image=redis --generator=run-pod/v1 --dry-run -o yaml >12.yml
+kubectl run pod-secrets-via-file --image=redis --generator=run-pod/v1 --dry-run -o yaml >  12.yml
+echo "---" >> 12.yml
+kubectl run pod-secrets-via-env  --image=redis --generator=run-pod/v1 --dry-run -o yaml >> 12.yml
 
 vi 12.yml
 
