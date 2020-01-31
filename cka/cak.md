@@ -270,8 +270,8 @@ The format of the file should be one ```pod``` name per line.
 Question weight: 3%
 
 ```
-SVC_LABELS=$(kubectl describe svc foo -n production | grep -i selector | awk '{print $2}'
-kubectl get pods --show-labels | grep $SVC_LABELS | awk '{print $1}' > /opt/KUCC00302/kucc00302.txt 
+SVC_LABELS=$(kubectl describe svc foo -n production | grep -i selector | awk '{print $2}')
+kubectl get pods --show-labels --all-namespaces | grep $SVC_LABELS | awk '{print $2}' > /opt/KUCC00302/kucc00302.txt 
 ```
 -------------------
 
