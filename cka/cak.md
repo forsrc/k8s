@@ -418,7 +418,7 @@ Question weight: 2%
 
 ```
 READY=$(kubectl get node | grep -w  Ready | wc -l)
-NO_SCHEDULE=$(kubectl describe nodes | grep Taints | grep NoShttps://github.com/chedule | wc -l)
+NO_SCHEDULE=$(kubectl describe nodes | grep Taints | grep NoSchedule | wc -l)
 expr $READY - $NO_SCHEDULE > /opt/nodenum
 ```
 -------------------
