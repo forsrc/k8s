@@ -105,7 +105,7 @@ spec:
   initContainers:
   - name: init-busybox
     image: busybox
-    command: ["/bin/sh", "-c", "touch /workdir/calm.txt"]
+    command: ["/bin/sh", "-c", "mkdir /workdir/ && touch /workdir/calm.txt"]
     volumeMounts:
     - name: workdir
       mountPath: /workdir
