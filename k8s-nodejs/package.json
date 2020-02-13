@@ -1,0 +1,19 @@
+{
+  "name": "k8s-nodejs",
+  "version": "1.0.0",
+  "description": "k8s client",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "node app/index.js",
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "keywords": [
+    "k8s",
+    "nodejs"
+  ],
+  "author": "forsrc@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@kubernetes/client-node": "^0.11.1"
+  }
+}
