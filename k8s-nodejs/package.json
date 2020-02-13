@@ -14,6 +14,7 @@
   "author": "forsrc@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "@kubernetes/client-node": "^0.11.1"
+    "@kubernetes/client-node": "^0.11.1",
+    "request": "^2.88.2"
   }
 }
