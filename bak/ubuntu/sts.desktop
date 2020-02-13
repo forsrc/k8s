@@ -1,0 +1,7 @@
+[Desktop Entry] 
+Name=sts
+Comment=sts
+Exec=/media/forsrc/E/ubuntu/tools/sts-4.4.0.RELEASE/SpringToolSuite4
+Icon=/media/forsrc/E/ubuntu/tools/sts-4.4.0.RELEASE/icon.xpm
+Terminal=false
+Type=Application
