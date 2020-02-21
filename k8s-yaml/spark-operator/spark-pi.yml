@@ -3,7 +3,7 @@ kind: SparkApplication
 metadata:
   name: my-spark-app
 spec:
-  image: quay.io/jkremser/openshift-spark:2.4-latest
+  image: quay.io/radanalyticsio/openshift-spark
   mainApplicationFile: local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar
   mainClass: org.apache.spark.examples.SparkPi
   sleep: 300 # repeat each 5 minutes
