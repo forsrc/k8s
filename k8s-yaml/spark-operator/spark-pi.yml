@@ -3,5 +3,5 @@ kind: SparkApplication
 metadata:
   name: my-spark-cluster
 spec:
-  mainApplicationFile: local:///opt/spark/examples/jars/spark-examples_2.11-2.4.0.jar
+  mainApplicationFile: local:///opt/spark/examples/jars/spark-examples_2.11-2.4.5.jar
   mainClass: org.apache.spark.examples.SparkPi
