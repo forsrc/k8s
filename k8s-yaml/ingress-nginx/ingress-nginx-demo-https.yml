@@ -1,24 +1,68 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: ingress-nginx-demo
+  name: ingress-nginx-https-demo
   labels:
-    name: ingress-nginx-demo
----
+    name: ingress-nginx-https-demo
 
+---
+# openssl genrsa -out demo.forsrc.com.key 2048
+# openssl req -new -x509 -key demo.forsrc.com.key -out demo.forsrc.com.crt -subj /C=CN/ST=forsrc/L=forsrc/O=devops/CN=demo.forsrc.com
+# kubectl create secret tls myapp -n ingress-nginx-https-demo --cert=demo.forsrc.com.crt --key=demo.forsrc.com.key
 apiVersion: v1
-kind: Service
+kind: Secret
 metadata:
   name: myapp
-  namespace: ingress-nginx-demo
-spec:
-  selector:
-    app: myapp
-    release: stable
-  ports:
-  - name: myapp
-    port: 80
-    targetPort: 80
+  namespace: ingress-nginx-https-demo
+type: Opaque
+data:
+  tls.crt: | 
+    MIIDlTCCAn2gAwIBAgIUSfkDeoStrrk20fD/f474zfxCrrgwDQYJKoZIhvcNAQEL
+    BQAwWjELMAkGA1UEBhMCQ04xDzANBgNVBAgMBmZvcnNyYzEPMA0GA1UEBwwGZm9y
+    c3JjMQ8wDQYDVQQKDAZkZXZvcHMxGDAWBgNVBAMMD2RlbW8uZm9yc3JjLmNvbTAe
+    Fw0yMDAzMDMxNTQ3MDJaFw0yMDA0MDIxNTQ3MDJaMFoxCzAJBgNVBAYTAkNOMQ8w
+    DQYDVQQIDAZmb3JzcmMxDzANBgNVBAcMBmZvcnNyYzEPMA0GA1UECgwGZGV2b3Bz
+    MRgwFgYDVQQDDA9kZW1vLmZvcnNyYy5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IB
+    DwAwggEKAoIBAQCsmsWiioGURk7lmedoHysvbbb76z1TtKaJ0QVu0wQfpzHGLZv2
+    yaYQnOVWbgYaiWieZVrXMKoDqf2+4FvmyNn0bPBFerXtvaPVbeVnWfskwg/U7/2v
+    +VLV/MWe8Qo9RlyAiBfLNVbTt6dJnwolYUer5Ac0jNs85UYHPUNlt09Dc16UoHph
+    Vny1xW2Vqxx0ptkRhOMZxaShp4M6QcpgMMgPRA01JKk3yysrihTcRtKCy9Mu6oxE
+    Bw7wsB7zMJ/KLu0Td+rl+mPzQQVrFq87IAK6ENhmX54XbqIuYaRqMH+X2zjQMJrF
+    uhdiQ+Y3ysJ9ViDFxV5zeteqwwZDrkFcHYLbAgMBAAGjUzBRMB0GA1UdDgQWBBTK
+    2R2xOyuPcxFwWWLd34sXJNsX5jAfBgNVHSMEGDAWgBTK2R2xOyuPcxFwWWLd34sX
+    JNsX5jAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQBQpNaoSI84
+    NYYu4vPIimNkcxqTnRMpAnXG3oeTHYUFImKUdy9g39og4BtRkXltA3NQITax0Qw9
+    zkYgmpQ5+dQ5cF9miqovlwRI8bm50e3r1XU993jkfPQPG/6lwSffg4rRucEr30uy
+    iu+McHBH2+h2gD3RwREGwGU0qspdBV7m9LQPLoe/usK78rNlQ8YsdubdbqdzSq97
+    omit9STDCA37EERs7KHj9cZMEpCjVsPGKF4UTb6QVizKLXtMltQ54swnzoA65pfw
+    2UmI1u3XRnWcYfgguRMfnhR1kAnfU7o1U7/J5pZu657+AxOpi6XlbtRvFokyBGNj
+    1Otk8Ydt2EoE
+  tls.key:  |
+    MIIEpQIBAAKCAQEArJrFooqBlEZO5ZnnaB8rL222++s9U7SmidEFbtMEH6cxxi2b
+    9smmEJzlVm4GGolonmVa1zCqA6n9vuBb5sjZ9GzwRXq17b2j1W3lZ1n7JMIP1O/9
+    r/lS1fzFnvEKPUZcgIgXyzVW07enSZ8KJWFHq+QHNIzbPOVGBz1DZbdPQ3NelKB6
+    YVZ8tcVtlascdKbZEYTjGcWkoaeDOkHKYDDID0QNNSSpN8srK4oU3EbSgsvTLuqM
+    RAcO8LAe8zCfyi7tE3fq5fpj80EFaxavOyACuhDYZl+eF26iLmGkajB/l9s40DCa
+    xboXYkPmN8rCfVYgxcVec3rXqsMGQ65BXB2C2wIDAQABAoIBAQCSi01k9SeTFiaC
+    NasM8fmeaQ5E0LLe0K/crsRoFWyY20EdOzgBza7ax/rG6N7xxNw4L2Fy9nRCbB9t
+    4drlFH5IUf2lX8v6r1ncKVPt7a2WxdTfO2st7wbve47lpUzGPWjoD6Pz+bNgSbsU
+    fJ0Go5NQU2fyq+yvxRExsEf6oin/3xxJlf7tk/ictkLAYFFNIZwVABLTHtupv6q2
+    CfvqrH4GCLBCB5SGHvhQN2xMQR6kyUF5QAJ19xZURZcK0yvddM+MMU7P1U8ncEAt
+    OBDbINc40Smu1d2Om9QuJxC+URGh8PZrIt9vBEnTQKy07zrMMzxnHFOIEoPouorF
+    eESP20wxAoGBAN8QwdWi5wr/hdZ9C7vN63cNRUis2GTBa7PR1SM7r2I1Dvb0wBA1
+    0p1JPEljLO0nBc0yQIHrCprmaBxN3/9OnKSNXxmc1sWJCHPSApmRCQQWwnGasISk
+    dg7u08Fhds8u3wjrsOUmTUBdWpzzFDbpZkT4CMK7bT5mqf4CUuQcfeoFAoGBAMYW
+    vIfQ1aV6OMiPvhzWYh74Z7kuZMHiOWpnA2wz6pj0wpkmv6VSKB2gkXri3jNTJI9u
+    H5MoiDwUFzUwTi0Sg0CYt5s4dxLSbG5itGCpbb8cb3hX36oBXq7Ajlx4te9fYDUs
+    g7Wmn0U9MhcQ2kkpqqQKNPRBdi0HtH85Spuble9fAoGBAJfOdqvmnmhMt4/eL/MS
+    09GEtYcdInOHcr3A6tV8lAI468NDk8Y0au5h3eZv2S5YJUmdjmscQ25hqa7BjNTa
+    ch5Gm9b5duyeMqNn5B8QplsjBhd8V+8dYb8N6AyuQMYFNwKCLDP22hIYtkcj4rjw
+    JIqBZqzoExOpmLzmZfUaMtLlAoGAREOnmwJr7gfts6hdsuBqlhOy4w1K6coFUVbI
+    xiwqB6Ypvc+tsdJbQsKIABpYysU3Tzp7JSKNuG6QBONtvXioxMUcWSCfYFwlw/C+
+    CqW4zWiGPanCyXqJX526McHjqOdsZ0a86QfP0XOiZHKJVzdFuBxQXXCFwkTqfgGH
+    ZZK7m+8CgYEAwxDu6h5hUh9lhAaux4ZOmYWTdjFoAlwfOPA2RpkssHYU94ftqMFR
+    hhIfuZAx5Gk4aLEiwzEyAfhECwt5mepTazsolDQonle5B0xDlFo+mDfbxY1vuFOY
+    UDJm7tGw8wJnJIwBDfPAoX1+xCHuZgfkAGggiiGYWKN/7189SoiDGcc=
 
 ---
 
@@ -26,7 +70,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: myapp
-  namespace: ingress-nginx-demo
+  namespace: ingress-nginx-https-demo
 spec:
   replicas: 1
   selector:
@@ -48,11 +92,28 @@ spec:
           containerPort: 80
 
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  namespace: ingress-nginx-https-demo
+spec:
+  selector:
+    app: myapp
+    release: stable
+  type: NodePort
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 31443
+    # curl -k https://  -H "HOST:demo.forsrc.com"
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ingress-myapp
-  namespace: ingress-nginx-demo
+  name: myapp
+  namespace: ingress-nginx-https-demo
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
@@ -67,7 +128,4 @@ spec:
   tls:
   - hosts:
     - demo.forsrc.com
-    secretName: nginx-demo
-    # openssl genrsa -out demo.forsrc.com.key 2048
-    # openssl req -new -x509 -key demo.forsrc.com.key -out demo.forsrc.com.crt -subj /C=CN/ST=forsrc/L=forsrc/O=devops/CN=demo.forsrc.com
-    # kubectl create secret tls nginx-demo --cert=demo.forsrc.com.crt --key=demo.forsrc.com.key
+    secretName: myapp
