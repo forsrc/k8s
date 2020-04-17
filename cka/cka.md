@@ -165,7 +165,7 @@ Schedule a Pod as follows:
 Question weight: 2%
 
 ```
-kubectl run nginx-kusc00101 --image=nginx --restart=Never --dry-run > 6.yaml
+kubectl run nginx-kusc00101 --image=nginx --restart=Never --dry-run  -o yaml > 6.yaml
 vi 6.yaml
 
 ---
