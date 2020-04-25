@@ -475,7 +475,7 @@ Question weight: 7%
 ```
 ETCDCTL_API=3
 etcdctl --endpoints=http://127.0.0.1:2379 \
-        --ca-file=/opt/KUCM00302/ca.crt \
+        --cacert=/opt/KUCM00302/ca.crt \
         --cert-file=/opt/KUCM00302/etcd-client.crt \
         --key=/opt/KUCM00302/etcd-client.key \
         snapshot save /data/backup/etcd-snapshot.db
