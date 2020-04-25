@@ -329,10 +329,6 @@ metadata:
     run: pod-secrets-via-env
   name: pod-secrets-via-env
 spec:
-  volumes:
-  - name: super-secret
-    secret:
-      secretName: super-secret
   containers:
   - image: redis
     name: pod-secrets-via-env
