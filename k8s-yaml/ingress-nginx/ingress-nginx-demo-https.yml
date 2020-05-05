@@ -107,7 +107,7 @@ spec:
     port: 80
     targetPort: 80
     nodePort: 31443
-    # curl -k https://172.7.0.10:31443  -H "HOST:demo.forsrc.com"
+    # curl -k `kubectl get ingress -n ingress-nginx-https-demo myapp | grep myapp | awk '{print $4}'` -H "HOST:demo.forsrc.com"
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
