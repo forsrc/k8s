@@ -66,6 +66,42 @@ data:
 
 ---
 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myapp-nginx-conf
+  namespace: ingress-nginx-https-demo
+data:
+  nginx.conf: |-
+    server {
+      listen     80;
+      server_tokens on;
+      location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+      }
+    }
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myapp-nginx-conf-html
+  namespace: ingress-nginx-https-demo
+data:
+  index.html: |-
+    <!DOCTYPE html>
+    <html>
+    <head>
+    </head>
+    <body>
+      hello world, k8s ingress https
+    </body>
+    </html>
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -90,6 +126,18 @@ spec:
         ports:
         - name: myapp
           containerPort: 80
+        volumeMounts:
+        - name: conf
+          mountPath: /etc/nginx/conf.d/
+        - name: index-html
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: conf
+        configMap:
+          name: myapp-nginx-conf
+      - name: index-html
+        configMap:
+          name: myapp-nginx-conf-html
 
 ---
 apiVersion: v1
