@@ -14,7 +14,7 @@ kind: Secret
 metadata:
   name: myapp
   namespace: ingress-nginx-https-demo
-type: Opaque
+type: kubernetes.io/tls
 data:
   tls.crt: | 
     MIIDlTCCAn2gAwIBAgIUSfkDeoStrrk20fD/f474zfxCrrgwDQYJKoZIhvcNAQEL
