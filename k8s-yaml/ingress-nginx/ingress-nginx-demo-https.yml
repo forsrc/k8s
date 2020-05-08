@@ -9,6 +9,8 @@ metadata:
 # openssl genrsa -out demo.forsrc.com.key 2048
 # openssl req -new -x509 -key demo.forsrc.com.key -out demo.forsrc.com.crt -subj /C=CN/ST=forsrc/L=forsrc/O=devops/CN=demo.forsrc.com
 # kubectl create secret tls myapp -n ingress-nginx-https-demo --cert=demo.forsrc.com.crt --key=demo.forsrc.com.key
+
+
 apiVersion: v1
 kind: Secret
 metadata:
@@ -16,6 +18,7 @@ metadata:
   namespace: ingress-nginx-https-demo
 type: kubernetes.io/tls
 data:
+  # cat demo.forsrc.com.crt | base64
   tls.crt: |
     LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURsVENDQW4yZ0F3SUJBZ0lVWk9MOW1PaHV2
     MWhmV3JGeUJiWUhxZjE4SVd3d0RRWUpLb1pJaHZjTkFRRUwKQlFBd1dqRUxNQWtHQTFVRUJoTUNR
@@ -40,6 +43,7 @@ data:
     TUsyNXFiTjZjcktORklYK1liN1U1bFJiY2xNYUFRRGFiWjNXaEFWSUowTVRXMjVNQ09HTGxMNVlH
     CklFVlI5NzdOL1ZHR0hZY2tmdS8wYlc1YUFkdzljWC9QaVduL3RBYWRrenlQL1k1M3FkOUVwSExw
     bmhDNHRxQmUKUWRuUXBmMkRBU2VhCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  # cat demo.forsrc.com.key | base64
   tls.key:  |
     LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBNjVPQmhBOGpo
     Z0ZzT1BNb3lVZ1pIbHk1cGNQTFVicjZlb09pYUVLMUtQZmJ6K1d1CjE2MjRKQVdiOEo2RThhRUpm
