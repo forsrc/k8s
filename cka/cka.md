@@ -12,10 +12,14 @@ Monitor the logs of Pod ```foobar``` and
 
 Question weight 5%
 
+<details><summary></summary><div>
+
 ```
 kubectl logs foobar | grep file-not-found > /opt/KULM00201/foobar
 
 ```
+</div></details>
+
 ------------------
 
 2. Set configuration context ```$ kubectl config use-context k8s```
@@ -25,10 +29,14 @@ Use ```kubectl```’s own functionally for sorting the output, and do not manipu
 
 Question weight 3%
 
+<details><summary></summary><div>
+
 ```
 kubectl get pv --sort-by=.metadata.name > /opt/KUCC0010/my_volumes
 ```
 * https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+</div></details>
+
 ------------------
 
 3. Set configuration context ```$ kubectl config use-context k8s```
@@ -38,6 +46,8 @@ Ensure a single instance of Pod nginx is running on each node of the kubernetes 
 Use Daemonsets to complete this task and use ```ds.kusc00201``` as Daemonset name. 
 
 Question weight 3%
+
+<details><summary></summary><div>
 
 ```
 kubectl run ds.kusc00201 --image=nginx --dry-run -o yaml > 3.yaml
@@ -71,6 +81,8 @@ spec:
 #status: {}
 ```
 * https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/ 
+</div></details>
+
 ------------------
 
 
@@ -83,6 +95,8 @@ Perform the following tasks
 *    Once the spec file has been updated with the init container definition, the Pod should be created.
 
 Question weight 7%
+
+<details><summary></summary><div>
 
 ```
 vi /opt/kucc00100/pod-sepc-KUCC00100.yaml
@@ -114,6 +128,8 @@ spec:
     emptyDir: {}
 ```
 * https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+</div></details>
+
 ------------------
 
 
@@ -122,6 +138,8 @@ spec:
 Create a pod named ```kucc4``` with a single container for each of the following images running inside (there may be between 1 and 4 images specified): ```nginx``` + ```redis``` + ```memcached``` + ```consul```
 
 Question weight: 4%
+
+<details><summary></summary><div>
 
 ```
 kubectl run kucc4 --image=nginx --restart=Never --dry-run -o yaml > 5.yaml
@@ -153,6 +171,8 @@ spec:
 kubectl apply -f 5.yaml
 ```
 * https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
+</div></details>
+
 -------------------
 
 6. Set configuration context ```$ kubectl config use-context k8s```
@@ -163,6 +183,8 @@ Schedule a Pod as follows:
 *    Node   ```selector: disk=ssd``` 
 
 Question weight: 2%
+
+<details><summary></summary><div>
 
 ```
 kubectl run nginx-kusc00101 --image=nginx --restart=Never --dry-run  -o yaml > 6.yaml
@@ -184,6 +206,8 @@ spec:
 
 ```
 * https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ 
+</div></details>
+
 -------------------
 
 7. Set configuration context ```$ kubectl config use-context k8s```
@@ -199,6 +223,8 @@ Finally, rollback that update to the previous version ```1.10.2-alpine```
 
 Question weight: 4%
 
+<details><summary></summary><div>
+
 ```
 kubectl run nginx-app --image=nginx:1.10.2-alpine --replicas=3
  
@@ -211,6 +237,8 @@ kubectl rollout status -w deployment nginx-app
  
 kubectl rollout history deployment/nginx-app       
 ```
+</div></details>
+
 -------------------
 
 8. Set configuration context ```$ kubectl config use-context k8s```
@@ -219,10 +247,14 @@ Create and configure the service ```front-end-service``` so it’s accessible th
 
 Question weight: 4%
 
+<details><summary></summary><div>
+
 ```
 kubectl expose pod front-end --name=front-end-service --type='NodePort' --port=80
 ```
 * https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+</div></details>
+
 -------------------
 
 9. Set configuration context ```$ kubectl config use-context k8s```
@@ -234,12 +266,16 @@ Create a Pod as follows:
     
 Question weight 3%
 
+<details><summary></summary><div>
+
 ```
 kubectl create namespace website-frontend
 kubectl run jenkins --image=jenkins --generator=run-pod/v1 --dry-run -o yaml > 9.yml
 kubectl apply -f 9.yml -n website-frontend
 ```
 * https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
+</div></details>
+
 ------------------
 
 10. Set configuration context ```$ kubectl config use-context k8s```
@@ -254,11 +290,15 @@ When you are done, clean up (delete) any new k8s API objects that you produced d
 
 Question weight: 3%
 
+<details><summary></summary><div>
+
 ```
 kubectl run kua100201 --image=redis --replicas=7 --labels=app_env_stage=dev --dry-run -o yaml > /opt/KUAL002001/deploy_spec.yaml
 kubectl apply  -f /opt/KUAL002001/deploy_spec.yaml 
 kubectl delete -f /opt/KUAL002001/deploy_spec.yaml 
 ```
+</div></details>
+
 -------------------
 
 11. Set configuration context ```$ kubectl config use-context k8s```
@@ -269,10 +309,14 @@ The format of the file should be one ```pod``` name per line.
 
 Question weight: 3%
 
+<details><summary></summary><div>
+
 ```
 SVC_LABELS=$(kubectl describe svc foo -n production | grep -i selector | awk '{print $2}')
 kubectl get pods --show-labels --all-namespaces | grep $SVC_LABELS | awk '{print $2}' > /opt/KUCC00302/kucc00302.txt 
 ```
+</div></details>
+
 -------------------
 
 12. Set configuration context ```$ kubectl config use-context k8s```
@@ -286,6 +330,8 @@ Create a Pod named ```pod-secrets-via-file``` using the ```redis``` image which 
 Create a second Pod named ```pod-secrets-via-env``` using the ```redis``` image, which exports credential as ```TOPSECRET```
 
 Question weight: 9%
+
+<details><summary></summary><div>
 
 ```
 kubectl create secret generic super-secret --from-literal=credential=alice --from-literal=username=bob
@@ -345,6 +391,8 @@ status: {}
 
 ```
 * https://kubernetes.io/docs/concepts/configuration/secret/
+</div></details>
+
 -------------------
 
 13. Set configuration context ```$ kubectl config use-context k8s```
@@ -358,6 +406,8 @@ Create a pad as follows:
 It should launch in the ```pre-prod``` namespace and the volume MUST NOT be persistent.
 
 Question weight: 4%
+
+<details><summary></summary><div>
 
 ```
 kubectl run non-persistent-redis --image=redis --generator=run-pod/v1 --dry-run -o yaml > 13.yaml
@@ -394,6 +444,8 @@ kubectl create ns pre-prod
 kubectl apply -f 13.yml -n pre-prod
 ```
 * https://kubernetes.io/docs/concepts/storage/volumes/
+</div></details>
+
 -------------------
 
 14. Set configuration context ```$ kubectl config use-context k8s```
@@ -401,9 +453,13 @@ Scale the deployment ```webserver``` to ```6``` pods
 
 Question weight: 1%
 
+<details><summary></summary><div>
+
 ```
 kubectl scale deployment webserver --replicas=6
 ```
+</div></details>
+
 -------------------
 
 15. Set configuration context ```$ kubectl config use-context k8s```
@@ -412,11 +468,15 @@ Check to see how many nodes are ready (not including nodes tainted ```NoSchedule
 
 Question weight: 2%
 
+<details><summary></summary><div>
+
 ```
 READY=$(kubectl get node | grep -w  Ready | wc -l)
 NO_SCHEDULE=$(kubectl describe nodes | grep Taints | grep NoSchedule | wc -l)
 expr $READY - $NO_SCHEDULE > /opt/nodenum
 ```
+</div></details>
+
 -------------------
 
 16. Set configuration context ```$ kubectl config use-context k8s```
@@ -425,9 +485,13 @@ From the Pod label ```name=cpu-utilizer```, find pods running high CPU workloads
 
 Question weight: 2%
 
+<details><summary></summary><div>
+
 ```
 kubectl top pods -l name=cpu-utilizer --all-namespaces | sort -k3 -n | tail -1 | awk '{print $2}' > /opt/cpu.txt
 ```
+</div></details>
+
 -------------------
 
 17. Set configuration context ```$ kubectl config use-context k8s```
@@ -444,6 +508,8 @@ Ensure you use the ```busybox:1.28``` image(or earlier) for any testing, an the 
 
 Question weight: 7%
 
+<details><summary></summary><div>
+
 ```
 kubectl run nginx-dns --image=nginx 
 kubectl expose deployment nginx-dns --port=80
@@ -452,6 +518,8 @@ kubectl run busybox --image=busybox:1.28 --restart=Never --command sleep 3600
 kubectl exec -ti busybox -- nslookup nginx-dns > /opt/service.dns
 kubectl exec -ti busybox -- nslookup $IP > /opt/pod.dns
 ```
+</div></details>
+
 -------------------
 
 18. No configuration context change required for this item
@@ -468,6 +536,8 @@ The following TLS ```certificates/key``` are supplied for connecting to the serv
 
 Question weight: 7%
 
+<details><summary></summary><div>
+
 ```
 ETCDCTL_API=3
 etcdctl --endpoints=http://127.0.0.1:2379 \
@@ -479,6 +549,8 @@ etcdctl --endpoints=http://127.0.0.1:2379 \
 ETCDCTL_API=3 etcdctl --write-out=table snapshot status /data/backup/etcd-snapshot.db
 ```
 * https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster
+</div></details>
+
 -------------------
 
 19. Set configuration context ```$ kubectl config use-context ek8s```
@@ -487,6 +559,8 @@ Set the node labelled with ```name=ek8s-node-1``` as unavailable and reschedule 
 
 Question weight: 4%
 
+<details><summary></summary><div>
+
 ```
 NODE=$(kubectl get nodes -l name=ek8s-node-1 | awk '{print $1}')
 kubectl drain    $NODE --ignore-daemonsets=true --delete-local-data=true --force=true
@@ -494,6 +568,8 @@ kubectl uncordon $NODE
 ```
  * https://kubernetes.io/docs/concepts/architecture/nodes/
  * https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#concepts
+</div></details>
+
 -------------------
 
 20. Set configuration context ```$ kubectl config use-context wk8s```
@@ -507,6 +583,8 @@ Hints:
 
 Question weight: 4%
 
+<details><summary></summary><div>
+
 ```
 kubectl get nodes
 ssh wk8s-node-0
@@ -515,6 +593,8 @@ systemctl status kubelet
 systemctl enable kubelet
 systemctl start  kubelet
 ```
+</div></details>
+
 -------------------
 
 21. Set configuration context ```$ kubectl config use-context wk8s```
@@ -528,6 +608,8 @@ Hints:
 
 Question weight: 4%
 
+<details><summary></summary><div>
+
 ```
 ssh wk8s-node-1
 sudo -i
@@ -539,6 +621,8 @@ systemctl restart kubelet
 systemctl enable  kubelet
 ```
 * https://kubernetes.io/docs/tasks/administer-cluster/static-pod/
+</div></details>
+
 -------------------
 
 22. Set configuration context ```$ kubectl config use-context ik8s```
@@ -569,9 +653,13 @@ Hints:
 
 Question weight: 8%
 
+<details><summary></summary><div>
+
 ```
 ```
 * https://unofficial-kubernetes.readthedocs.io/en/latest/admin/kubelet-tls-bootstrapping/
+</div></details>
+
 -------------------
 
 23. Set configuration context ```$ kubectl config use-context bk8s```
@@ -584,6 +672,8 @@ The worker node in this cluster is labelled with ```name=bk8s-node-0``` Hints:
 *    You can assume elevated privileges on any node in the cluster with the following command ```$ sudo -i```
 
 Question weight: 4%
+
+<details><summary></summary><div>
 
 ```
 ssh bk8s-master-0
@@ -600,6 +690,8 @@ ssh bk8s-node-0
 sudo -i
 systemctl start kube-manager-controller
 ```
+</div></details>
+
 -------------------
 
 24. Set configuration context ```$ kubectl config use-context hk8s```
@@ -607,6 +699,9 @@ systemctl start kube-manager-controller
 Creae a persistent volume with name app-config of capacity 1Gi and access mode ReadWriteOnce. The type of volume is hostPath and its location is ```/srv/app-config```
 
 Question weight: 3%
+
+<details><summary></summary><div>
+
 ```
 https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes
 vi 24.yaml
@@ -627,4 +722,6 @@ kubectl apply -f 24.yaml
 
 ```
 * https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes
+</div></details>
+
 -------------------
