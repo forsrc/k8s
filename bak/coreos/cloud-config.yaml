@@ -1,4 +1,5 @@
 # console=tty1 coreos.autologin=tty1
+# sudo coreos-install -d /dev/sda -C stable -c ./cloud-config.yaml
 
 hostname: "coreos"
 
