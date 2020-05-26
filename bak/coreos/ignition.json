@@ -1,0 +1,21 @@
+{
+  "ignition": { "version": "2.0.0" },
+  "networkd": {
+    "units": [
+      {
+        "name": "00-eth0.network",
+        "contents": "[Match]\nName=eth0\n\n[Network]\nAddress=172.10.0.2/24\nDNS=8.8.8.8\nGateway=172.10.0.1"
+    }]
+  },
+  "passwd": {
+    "users": [
+      {
+        "name": "core",
+        "passwordHash": "$1$WNTheYlW$0ShoH/Ya3VihuDvWOQYRk.",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEA9Pk15BYPO/SdFrow6X1ZVCZ9zCjHVCC2enB5F3XXYvrdMRYSP98OPDGFbnb5eRm5SiVo4J1u0h9oqY9uZqj/Ysf3LqaNCm4W9EEqF1O+m7NGbnQzuxBE2Wbxo3WlBRV1fDnZiR+nMlFvnfsDv0Huro6EDHcd7o88Thq5aply2xPDtle33+tUZw0BWe9MKxYYew3n6jNcFY5uwOwvy3M/yQB2iWJMWZ2ZKIJrlHRRXIOARAaFQRN2aka76pCYA39ZcEivfnqHa2RJ0X+KOKOCBL7LGknpSRRsBWvXkqf5oBULB6YdPGyehvdweM/uf84sxROvJpMKDEzizBjWYCO1ZQ== rsa-key-20200527"
+        ]
+      }
+    ]
+  }
+}
