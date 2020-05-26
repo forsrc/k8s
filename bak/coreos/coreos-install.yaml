@@ -1,0 +1,32 @@
+# console=tty1 coreos.autologin=tty1
+
+hostname: "coreos"
+
+coreos:
+  units:
+    - name: etcd.service
+      command: start
+    - name: fleet.service
+      command: start
+
+users:
+  - name: core
+    passwd: $1$WNTheYlW$0ShoH/Ya3VihuDvWOQYRk.  #core
+    groups:
+    - "sudo"
+    - "docker"
+
+write_files:
+  - path: /etc/resolv.conf
+    content: |
+        nameserver 8.8.8.8
+
+networkd:
+ units:
+  - name: static.network
+    contents: |
+      [Match]
+      Name=eth0
+
+      [Network]
+      Address=172.10.0.2/24
