@@ -1,8 +1,9 @@
 #!/bin/sh
+echo [`date '+%Y-%m-%d %H:%M:%S'`] `hostname` start...
 
-/usr/sbin/init
-#systemctl restart autofs
 
+
+# /sbin/init
 
 # run the command given as arguments from CMD
 exec "$@"
