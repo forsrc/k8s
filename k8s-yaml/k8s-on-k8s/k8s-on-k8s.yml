@@ -2,3 +2,139 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: k8s-on-k8s
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: k8s-on-k8s
+  name: k8s-on-k8s
+  namespace: k8s-on-k8s
+
+---
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  labels:
+    app: k8s-on-k8s
+  name: k8s-on-k8s
+  namespace: k8s-on-k8s
+spec:
+  privileged: true  # Prevents creation of privileged Pods
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  runAsUser:
+    rule: RunAsAny
+  fsGroup:
+    rule: RunAsAny
+  volumes:
+  - '*'
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    app: k8s-on-k8s
+  name: k8s-on-k8s
+  namespace: k8s-on-k8s
+rules:
+- apiGroups:
+  - policy
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+  resourceNames:
+  - k8s-on-k8s
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app: k8s-on-k8s
+  name: k8s-on-k8s
+  namespace: k8s-on-k8s
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: k8s-on-k8s
+subjects:
+# Example: All service accounts in my-namespace
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:serviceaccounts
+# Example: A specific service account in my-namespace
+- kind: ServiceAccount # Omit apiGroup
+  name: k8s-on-k8s
+  namespace: k8s-on-k8s
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-master
+  namespace: k8s-on-k8s
+  labels:
+    app: k8s-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-master
+  template:
+    metadata:
+      #annotations:
+        #pod.beta.kubernetes.io/hostname: k8s-master  
+      labels:
+        app: k8s-master
+    spec:
+      hostname: k8s-master
+      hostAliases:
+      - ip: "127.0.0.1"
+        hostnames:
+        - "k8s-master"
+      serviceAccountName: k8s-on-k8s
+      containers:
+      - name: k8s-master
+        image: forsrc/dind:k8s
+        securityContext:
+          privileged: true
+        command:
+          - sh
+          - -c
+          - sed -i -e 's@^ExecStart=/usr/bin/kubelet.*@ExecStart=/usr/bin/kubelet \$KUBELET_KUBECONFIG_ARGS \$KUBELET_CONFIG_ARGS \$KUBELET_KUBEADM_ARGS \$KUBELET_EXTRA_ARGS --fail-swap-on=false@g' /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf && systemctl daemon-reload && systemctl restart kubelet && kubeadm init --kubernetes-version=`kubeadm version -o short` --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all
+        ports:
+        - containerPort: 6443
+          protocol: TCP
+        livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /healthz
+              port: 10248
+            initialDelaySeconds: 600
+            timeoutSeconds: 30
+
+---
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: k8s-master
+  name: k8s-master
+  namespace: k8s-on-k8s
+spec:
+  selector:
+    app: k8s-master
+  ports:
+    - name: api-server
+      port: 6443
+      targetPort: 6433
+      nodePort: 30433
+  type: NodePort
